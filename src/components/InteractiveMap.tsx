@@ -1,11 +1,10 @@
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-// @ts-ignore
 import * as topojson from 'topojson-client';
-import { FeatureCollection, Geometry } from 'geojson';
 
 const MapComponent = () => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const [rotation, setRotation] = useState([0, 0]);
 
   useEffect(() => {
     const width = 1000;
@@ -16,15 +15,14 @@ const MapComponent = () => {
       .style('width', '100%')
       .style('height', 'auto');
 
-    d3.json<FeatureCollection<Geometry, { name: string }>>('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
       .then((worldData) => {
-        if (!worldData) return;
+        const countries = topojson.feature(worldData as any, worldData.objects.countries);
 
-        const countries = topojson.feature(worldData as any, (worldData as any).objects.countries) as FeatureCollection;
-
-        const projection = d3.geoNaturalEarth1()
-          .scale(160)
-          .translate([width / 2, height / 2]);
+        const projection = d3.geoOrthographic()
+          .scale(300)
+          .translate([width / 2, height / 2])
+          .rotate(rotation); 
 
         const path = d3.geoPath().projection(projection);
 
@@ -55,12 +53,33 @@ const MapComponent = () => {
           .attr('text-anchor', 'middle')
           .attr('font-size', '8px')
           .attr('fill', 'black')
-          .style('pointer-events', 'none'); 
+          .style('pointer-events', 'none');
+
+        const zoom = d3.zoom()
+          .scaleExtent([1, 8])  
+          .on('zoom', (event: any) => {
+            const [angleY, angleX] = event.transform.k ? 
+                [event.transform.x, event.transform.y] : rotation;
+            setRotation([angleY, angleX]); 
+            projection.rotate([angleY, angleX]);  
+            svg.selectAll('path').attr('d', path as any);  
+            svg.selectAll('text').attr('x', (d) => {
+              const centroid = path.centroid(d as any);
+              return centroid[0];
+            }).attr('y', (d) => {
+              const centroid = path.centroid(d as any);
+              return centroid[1];
+            });
+          });
+
+        svg.call(zoom);
+
       })
       .catch((error) => {
         console.error('Error loading map data:', error);
       });
-  }, []);
+
+  }, [rotation]);
 
   return (
     <svg ref={svgRef}></svg>
