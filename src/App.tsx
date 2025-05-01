@@ -1,4 +1,5 @@
 import InteractiveMap from "./components/InteractiveMap";
+import RealTimeDashboard from "./components/RealTimeDashboard";
 
 import './App.css'
 
@@ -7,8 +8,8 @@ function App() {
   return (
     <>
       <div>
-      <h1>Проєкт з D3.js та React</h1>
-      <InteractiveMap />
+      {/* <InteractiveMap /> */}
+      <RealTimeDashboard />
     </div>
     </>
   )
