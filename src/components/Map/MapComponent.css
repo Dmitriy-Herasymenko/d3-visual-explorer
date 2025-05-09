@@ -1,0 +1,123 @@
+/* Змінні для світлої теми */
+:root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #111827;
+    --up: #22c55e;
+    --down: #ef4444;
+    --border: #ddd;
+    --hover-bg: #f1f1f1;
+    --primary-bg: #f9f9f9;
+  }
+  
+  /* Змінні для темної теми */
+  .dark {
+    --bg: #111827;
+    --card: #1f2937;
+    --text: #f9fafb;
+    --border: #444; 
+    --hover-bg: #333;
+  }
+  
+.container {
+    margin-top: 20px;
+}
+
+.container-map {
+    background-color: var(--card);
+    display: flex;
+    height: 100vh;
+    min-width: 1200px ;
+    border-radius: 1rem;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+
+}
+
+  .map-container {
+    display: flex;
+    height: 100vh;
+
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  /* SVG контейнер */
+  .map-container svg {
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid var(--border);
+  }
+  
+  /* Інформаційна панель */
+  .info-panel {
+    width: 500px;
+    background-color: var(--primary-bg);
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Заголовок панелі */
+  .info-panel h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  
+  /* Опис країни */
+  .info-panel p {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  
+  /* Слайдер */
+  .info-panel input[type="range"] {
+    width: 100%;
+    height: 10px;
+    background-color: var(--border);
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Текст для рівня зуму */
+  .info-panel p.zoom-level {
+    font-size: 16px;
+    color: var(--text);
+  }
+  
+  /* Кнопки та елементи для управління */
+  button,
+  input[type="range"] {
+    transition: all 0.3s ease;
+  }
+  
+  /* Кнопка зміни теми */
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--text);
+    color: var(--text);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Ховер ефект для кнопки зміни теми */
+  .theme-toggle:hover {
+    background-color: var(--up);
+    color: var(--card);
+  }
+  
+  /* Загальний фон для мапи */
+  .ocean {
+    fill: #cce5f6;
+  }
+  
