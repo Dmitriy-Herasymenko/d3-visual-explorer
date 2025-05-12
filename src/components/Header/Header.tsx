@@ -12,6 +12,7 @@ const Header: React.FC = () => {
         <a href="/">Home</a>
         <a href="/dashboard">Dashboard</a>
         <a href="/map">Map</a>
+        <a href="/forceGraph">Force Graph</a>
       </nav>
       <button className="theme-toggle" onClick={toggleTheme}>
         {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}

@@ -1,5 +1,6 @@
 import InteractiveMap from "./components/Map/InteractiveMap";
 import RealTimeDashboard from "./components/DashBoard/RealTimeDashboard";
+import ForceGraph from "./components/ForceGraph/ForceGraph"
 import { useEffect } from "react";
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/map" element={<InteractiveMap />} />
           <Route path="/dashboard" element={<RealTimeDashboard />} />
+          <Route path="/forceGraph" element={<ForceGraph />} />
           <Route path="/" element={<h2>Welcome to the App!</h2>} />
         </Routes>
       </Router>
